@@ -1,22 +1,33 @@
-function calculateTotal() {
-    // Select all price elements inside the table
-    let prices = document.querySelectorAll('.prices');
-    let total = 0;
+const getSumBtn = document.createElement("button");
+getSumBtn.append("Get Total Price");
+document.body.appendChild(getSumBtn);
 
-    // Loop through each price element and sum the values
-    prices.forEach(price => {
-        total += parseFloat(price.textContent) || 0; // Convert text to number and handle NaN
+const getSum = () => {
+    let total = 0;
+    document.querySelectorAll(".price").forEach(price => {
+        total += parseInt(price.textContent);
     });
 
-    // Create a new row for displaying the total
-    let table = document.querySelector('table'); // Select the table
-    let totalRow = document.createElement('tr'); // Create row
-    let totalCell = document.createElement('td'); // Create cell
+    let table = document.querySelector("table");
 
-    totalCell.colSpan = 2; // Span across two columns
-    totalCell.textContent = `Total Price: ${total.toFixed(2)}`; // Format total price
-    totalCell.style.fontWeight = "bold"; // Make text bold
+  
+    if (!table) return;
 
-    totalRow.appendChild(totalCell); // Append cell to row
-    table.appendChild(totalRow); // Append row to table
-}
+    let tableRow = document.createElement("tr");
+    let tableCol1 = document.createElement("td");
+    let tableCol2 = document.createElement("td");
+
+    tableCol1.textContent = "Total Price";
+    tableCol2.textContent = total;
+
+    tableRow.appendChild(tableCol1);
+    tableRow.appendChild(tableCol2);
+
+    // Append the total row as the last row of the table
+    table.appendChild(tableRow);
+
+    // Optionally add an ID for easy Cypress targetting
+    tableRow.id = "total-price-row";
+};
+
+getSumBtn.addEventListener("click", getSum);
