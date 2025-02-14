@@ -1,4 +1,6 @@
-
+const getSumBtn = document.createElement("button");
+getSumBtn.append("Get Total Price");
+document.body.appendChild(getSumBtn);
 const totalPriceElement = document.createElement("p");
 totalPriceElement.id = "ans"; 
 document.body.appendChild(totalPriceElement);
