@@ -1,6 +1,7 @@
-const getSumBtn = document.createElement("button");
-getSumBtn.append("Get Total Price");
-document.body.appendChild(getSumBtn);
+
+const totalPriceElement = document.createElement("p");
+totalPriceElement.id = "ans"; 
+document.body.appendChild(totalPriceElement);
 
 const getSum = () => {
     let total = 0;
@@ -8,26 +9,8 @@ const getSum = () => {
         total += parseInt(price.textContent);
     });
 
-    let table = document.querySelector("table");
-
-  
-    if (!table) return;
-
-    let tableRow = document.createElement("tr");
-    let tableCol1 = document.createElement("td");
-    let tableCol2 = document.createElement("td");
-
-    tableCol1.textContent = "Total Price";
-    tableCol2.textContent = total;
-
-    tableRow.appendChild(tableCol1);
-    tableRow.appendChild(tableCol2);
-
-    // Append the total row as the last row of the table
-    table.appendChild(tableRow);
-
-    // Optionally add an ID for easy Cypress targetting
-    tableRow.id = "total-price-row";
+    
+    totalPriceElement.textContent = "Total Price: " + total;
 };
 
 getSumBtn.addEventListener("click", getSum);
